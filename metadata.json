@@ -1,0 +1,7 @@
+{
+  "name": "Zarif Düğün Davetiyesi",
+  "description": "Şeymanur ve Akif'in modern, mobil öncelikli ve zarif dijital düğün davetiyesi. Geri sayım, etkinlik bilgileri ve harita entegrasyonu içerir.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
