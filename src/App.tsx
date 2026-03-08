@@ -12,8 +12,7 @@ import {
   Heart, 
   ChevronDown, 
   ExternalLink,
-  Music,
-  Camera
+  Music
 } from 'lucide-react';
 
 // --- Constants ---
@@ -43,12 +42,6 @@ const EVENTS = [
     icon: <Heart className="w-5 h-5" />,
     color: 'bg-blue-50'
   }
-];
-
-const PHOTOS = [
-  'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=800',
-  'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800',
-  'https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&q=80&w=800',
 ];
 
 // --- Components ---
@@ -245,34 +238,6 @@ export default function App() {
                   <ExternalLink className="w-4 h-4" />
                   Yol Tarifi Al
                 </a>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Photo Gallery */}
-      <section className="py-24 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <Camera className="w-8 h-8 text-wedding-gold mx-auto mb-8" />
-          <h2 className="text-4xl font-serif mb-16">Fotoğraflarımız</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {PHOTOS.map((photo, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="aspect-[3/4] rounded-2xl overflow-hidden shadow-md"
-              >
-                <img 
-                  src={photo} 
-                  alt={`Couple ${idx + 1}`} 
-                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
-                  referrerPolicy="no-referrer"
-                />
               </motion.div>
             ))}
           </div>
