@@ -131,7 +131,7 @@ export default function App() {
     <div className="min-h-screen selection:bg-wedding-gold selection:text-white overflow-x-hidden">
       
       {/* Hero Section */}
-      <section className="relative h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden">
+      <section className="relative min-h-[100dvh] flex flex-col items-center justify-center text-center px-6 overflow-hidden">
         {/* Background Overlay */}
         <div className="absolute inset-0 z-0">
           <img 
@@ -166,7 +166,7 @@ export default function App() {
         <motion.div 
           animate={{ y: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-stone-400"
+          className="absolute bottom-24 md:bottom-10 left-1/2 -translate-x-1/2 text-stone-400"
         >
           <ChevronDown className="w-6 h-6" />
         </motion.div>
