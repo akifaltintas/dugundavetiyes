@@ -40,7 +40,7 @@ const EVENTS = [
     address: 'Karagümrük, Kaleboyu Cd. No:107, Fatih/İstanbul',
     mapsUrl: 'https://maps.app.goo.gl/7aaVEwM2VeYhuzXz8',
     icon: <Heart className="w-5 h-5" />,
-    color: 'bg-blue-50'
+    color: 'bg-purple-50'
   }
 ];
 
@@ -135,12 +135,12 @@ export default function App() {
         {/* Background Overlay */}
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&q=80&w=1920" 
+            src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&q=80&w=1920" 
             alt="Wedding Background" 
-            className="w-full h-full object-cover opacity-20"
+            className="w-full h-full object-cover opacity-30"
             referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-wedding-cream/50 via-transparent to-wedding-cream"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-wedding-cream/60 via-wedding-cream/20 to-wedding-cream"></div>
         </div>
 
         <motion.div

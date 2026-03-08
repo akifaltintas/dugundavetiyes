@@ -6,10 +6,10 @@
   --font-sans: "Inter", sans-serif;
   --font-script: "Great Vibes", cursive;
   
-  --color-wedding-pink: #fdf2f2;
+  --color-wedding-pink: #ffe4e6;
   --color-wedding-gold: #c5a059;
-  --color-wedding-sage: #f1f3f0;
-  --color-wedding-cream: #fcfaf7;
+  --color-wedding-sage: #f3e8ff;
+  --color-wedding-cream: #fff0f5;
 }
 
 @layer base {
