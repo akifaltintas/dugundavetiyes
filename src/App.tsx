@@ -131,7 +131,7 @@ export default function App() {
     <div className="min-h-screen selection:bg-wedding-gold selection:text-white overflow-x-hidden">
       
       {/* Hero Section */}
-      <section className="relative min-h-[100dvh] flex flex-col items-center justify-center text-center px-6 overflow-hidden">
+      <section className="relative min-h-[100dvh] flex flex-col items-center justify-between text-center px-6 py-12 overflow-hidden">
         {/* Background Overlay */}
         <div className="absolute inset-0 z-0">
           <img 
@@ -143,11 +143,30 @@ export default function App() {
           <div className="absolute inset-0 bg-gradient-to-b from-wedding-cream/60 via-wedding-cream/20 to-wedding-cream"></div>
         </div>
 
+        {/* Top Verse */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.5, delay: 0.5 }}
+          className="z-10 max-w-3xl mt-4 md:mt-8 px-4"
+        >
+          <p className="font-quran text-lg md:text-xl text-stone-700 mb-4" dir="rtl">
+            بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
+          </p>
+          <p className="text-stone-600 text-xs md:text-sm font-light italic mb-2">
+            "Kendileri ile huzur bulasınız diye sizin için türünüzden eşler yaratması ve aranızda bir sevgi ve merhamet var etmesi de O'nun (varlığının ve kudretinin) delillerindendir. Şüphesiz bunda düşünen bir toplum için elbette ibretler vardır."
+          </p>
+          <p className="text-stone-500 text-[10px] md:text-xs uppercase tracking-widest">
+            Rûm Suresi, 21. Ayet
+          </p>
+        </motion.div>
+
+        {/* Center Content */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
-          className="z-10"
+          className="z-10 my-8"
         >
           <p className="text-wedding-gold font-script text-4xl md:text-5xl mb-4 animate-float">
             Düğünümüze Davetlisiniz
@@ -156,17 +175,18 @@ export default function App() {
             Şeymanur <span className="text-wedding-gold font-script text-4xl md:text-6xl">&</span> Akif
           </h1>
           <div className="w-12 h-[1px] bg-wedding-gold mx-auto mb-8"></div>
-          <p className="text-stone-600 uppercase tracking-[0.3em] text-sm md:text-base mb-12">
-            25 Nisan 2026
+          <p className="text-stone-700 font-sans font-light text-xl md:text-2xl tracking-[0.4em] mb-12">
+            25 NİSAN 2026
           </p>
           
           <CountdownTimer />
         </motion.div>
 
+        {/* Bottom Arrow */}
         <motion.div 
           animate={{ y: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
-          className="absolute bottom-24 md:bottom-10 left-1/2 -translate-x-1/2 text-stone-400"
+          className="z-10 text-stone-400 mb-4"
         >
           <ChevronDown className="w-6 h-6" />
         </motion.div>
