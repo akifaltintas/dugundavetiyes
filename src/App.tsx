@@ -23,7 +23,7 @@ const EVENTS = [
   {
     id: 'kina',
     title: 'Kına Gecesi',
-    date: '22 Nisan 2026',
+    date: '22 Nisan 2026 Çarşamba',
     time: '19:30',
     location: 'Hacı Evhaddin Çok Amaçlı Salon',
     address: 'Yedikule Mahallesi, Hacı Evhaddin Caddesi No: 76, Fatih/İstanbul',
@@ -34,7 +34,7 @@ const EVENTS = [
   {
     id: 'dugun',
     title: 'Düğün Töreni',
-    date: '25 Nisan 2026',
+    date: '25 Nisan 2026 Cumartesi',
     time: '19:00',
     location: 'Neslişah Sultan Kültür Merkezi',
     address: 'Karagümrük, Kaleboyu Cd. No:107, Fatih/İstanbul',
@@ -241,15 +241,15 @@ export default function App() {
                 
                 <div className="space-y-4 mb-8">
                   <div className="flex items-center gap-3 text-stone-600">
-                    <Calendar className="w-4 h-4 text-wedding-gold" />
+                    <Calendar className="w-5 h-5 text-wedding-gold shrink-0" />
                     <span>{event.date}</span>
                   </div>
                   <div className="flex items-center gap-3 text-stone-600">
-                    <Clock className="w-4 h-4 text-wedding-gold" />
+                    <Clock className="w-5 h-5 text-wedding-gold shrink-0" />
                     <span>{event.time}</span>
                   </div>
                   <div className="flex items-start gap-3 text-stone-600">
-                    <MapPin className="w-4 h-4 text-wedding-gold mt-1" />
+                    <MapPin className="w-5 h-5 text-wedding-gold shrink-0 mt-0.5" />
                     <div>
                       <p className="font-medium text-stone-800">{event.location}</p>
                       <p className="text-sm">{event.address}</p>
