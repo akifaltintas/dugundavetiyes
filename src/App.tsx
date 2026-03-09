@@ -131,7 +131,7 @@ export default function App() {
     <div className="min-h-screen selection:bg-wedding-gold selection:text-white overflow-x-hidden">
       
       {/* Hero Section */}
-      <section className="relative min-h-[100dvh] flex flex-col items-center justify-between text-center px-6 py-12 overflow-hidden">
+      <section className="relative min-h-[100dvh] flex flex-col items-center justify-between text-center px-6 pt-8 pb-12 overflow-hidden">
         {/* Background Overlay */}
         <div className="absolute inset-0 z-0">
           <img 
@@ -148,7 +148,7 @@ export default function App() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, delay: 0.5 }}
-          className="z-10 max-w-3xl mt-4 md:mt-8 px-4"
+          className="z-10 max-w-3xl mt-0 px-4"
         >
           <p className="font-quran text-lg md:text-xl text-stone-700 mb-4" dir="rtl">
             بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
@@ -229,7 +229,15 @@ export default function App() {
                   {event.icon}
                 </div>
                 
-                <h3 className="text-2xl font-serif mb-6 text-stone-900">{event.title}</h3>
+                <h3 className="text-2xl font-serif font-bold mb-2 text-stone-900">{event.title}</h3>
+                
+                {event.id === 'kina' && (
+                  <p className="text-rose-600 text-sm font-semibold mb-6 tracking-wide animate-pulse">
+                    (Hanımlara özeldir)
+                  </p>
+                )}
+                
+                {event.id !== 'kina' && <div className="mb-6" />}
                 
                 <div className="space-y-4 mb-8">
                   <div className="flex items-center gap-3 text-stone-600">
