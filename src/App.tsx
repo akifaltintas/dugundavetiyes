@@ -200,11 +200,21 @@ export default function App() {
 
         {/* Bottom Arrow */}
         <motion.div 
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-          className="z-10 text-stone-400 mb-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2, duration: 1 }}
+          className="z-10 flex flex-col items-center gap-2 mb-4"
         >
-          <ChevronDown className="w-6 h-6" />
+          <span className="text-[10px] uppercase tracking-[0.3em] text-stone-400 font-medium">
+            Aşağı Kaydırınız
+          </span>
+          <motion.div 
+            animate={{ y: [0, 8, 0] }}
+            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+            className="text-wedding-gold"
+          >
+            <ChevronDown className="w-5 h-5" />
+          </motion.div>
         </motion.div>
       </section>
 
