@@ -75,29 +75,45 @@ const CountdownTimer = () => {
     return () => clearInterval(timer);
   }, []);
 
+  const units = [
+    { label: 'GÜN', value: timeLeft.days },
+    { label: 'SAAT', value: timeLeft.hours },
+    { label: 'DAKİKA', value: timeLeft.minutes },
+    { label: 'SANİYE', value: timeLeft.seconds }
+  ];
+
   return (
-    <div className="grid grid-cols-4 gap-2 md:gap-4 max-w-sm mx-auto">
-      {[
-        { label: 'Gün', value: timeLeft.days },
-        { label: 'Saat', value: timeLeft.hours },
-        { label: 'Dakika', value: timeLeft.minutes },
-        { label: 'Saniye', value: timeLeft.seconds }
-      ].map((item, idx) => (
-        <motion.div 
-          key={idx}
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: idx * 0.1 }}
-          className="flex flex-col items-center p-2 rounded-xl glass-card"
-        >
-          <span className="text-2xl md:text-3xl font-serif font-semibold text-wedding-gold">
-            {item.value.toString().padStart(2, '0')}
-          </span>
-          <span className="text-[10px] uppercase tracking-widest text-stone-500 font-medium">
-            {item.label}
-          </span>
-        </motion.div>
-      ))}
+    <div className="flex flex-col items-center max-w-md mx-auto">
+      <div className="flex items-center justify-center gap-1 md:gap-4 py-4">
+        {units.map((item, idx) => (
+          <React.Fragment key={idx}>
+            <div className="flex flex-col items-center px-1 md:px-2 min-w-[50px] md:min-w-[70px]">
+              <div className="relative overflow-hidden h-10 md:h-14 flex items-center justify-center">
+                <AnimatePresence mode="wait">
+                  <motion.span 
+                    key={item.value}
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -20, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                    className="text-3xl md:text-5xl font-mono font-bold text-wedding-gold tracking-tight"
+                  >
+                    {item.value.toString().padStart(2, '0')}
+                  </motion.span>
+                </AnimatePresence>
+              </div>
+              <span className="text-[8px] md:text-[9px] text-stone-500 font-bold tracking-[0.25em] mt-2">
+                {item.label}
+              </span>
+            </div>
+            {idx < units.length - 1 && (
+              <div className="flex flex-col justify-center h-10 md:h-14 pb-4 md:pb-6">
+                <span className="text-xl md:text-3xl font-mono font-bold text-wedding-gold/30">:</span>
+              </div>
+            )}
+          </React.Fragment>
+        ))}
+      </div>
     </div>
   );
 };
