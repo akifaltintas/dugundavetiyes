@@ -17,14 +17,14 @@ import {
 
 // --- Constants ---
 const WEDDING_DATE = new Date('2026-04-25T19:00:00');
-const KINA_DATE = new Date('2026-04-22T19:30:00');
+const KINA_DATE = new Date('2026-04-22T19:00:00');
 
 const EVENTS = [
   {
     id: 'kina',
     title: 'Kına Gecesi',
     date: '22 Nisan 2026 Çarşamba',
-    time: '19:30',
+    time: '19:00',
     location: 'Hacı Evhaddin Çok Amaçlı Salon',
     address: 'Yedikule Mahallesi, Hacı Evhaddin Caddesi No: 76, Fatih/İstanbul',
     mapsUrl: 'https://maps.app.goo.gl/bAD1g5vdEsdQRkgo8',
@@ -163,7 +163,7 @@ export default function App() {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.5, delay: 0.5 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
           className="z-10 max-w-3xl mt-0 px-4"
         >
           <p className="font-quran text-lg md:text-xl text-stone-700 mb-4" dir="rtl">
@@ -181,7 +181,7 @@ export default function App() {
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           className="z-10 my-8"
         >
           <p className="text-wedding-gold font-script text-4xl md:text-5xl mb-4 animate-float">
@@ -202,7 +202,7 @@ export default function App() {
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 2, duration: 1 }}
+          transition={{ duration: 1 }}
           className="z-10 flex flex-col items-center gap-2 mb-4"
         >
           <span className="text-[10px] uppercase tracking-[0.3em] text-stone-400 font-medium">
