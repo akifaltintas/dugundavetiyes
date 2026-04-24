@@ -12,32 +12,22 @@ import {
   Heart, 
   ChevronDown, 
   ExternalLink,
-  Music
+  Music,
+  Map
 } from 'lucide-react';
+import confetti from 'canvas-confetti';
 
 // --- Constants ---
 const WEDDING_DATE = new Date('2026-04-25T19:00:00');
-const KINA_DATE = new Date('2026-04-22T19:00:00');
 
 const EVENTS = [
-  {
-    id: 'kina',
-    title: 'Kına Gecesi',
-    date: '22 Nisan 2026 Çarşamba',
-    time: '19:00',
-    location: 'Hacı Evhaddin Çok Amaçlı Salon',
-    address: 'Yedikule Mahallesi, Hacı Evhaddin Caddesi No: 76, Fatih/İstanbul',
-    mapsUrl: 'https://maps.app.goo.gl/bAD1g5vdEsdQRkgo8',
-    icon: <Music className="w-5 h-5" />,
-    color: 'bg-rose-50'
-  },
   {
     id: 'dugun',
     title: 'Düğün Töreni',
     date: '25 Nisan 2026 Cumartesi',
     time: '19:00',
     location: 'Neslişah Sultan Kültür Merkezi',
-    address: 'Karagümrük, Kaleboyu Cd. No:107, Fatih/İstanbul',
+    address: 'Karagümrük, Kaleboyu Cd. No:107, Karagümrük, Fatih/İstanbul',
     mapsUrl: 'https://maps.app.goo.gl/7aaVEwM2VeYhuzXz8',
     icon: <Heart className="w-5 h-5" />,
     color: 'bg-purple-50'
@@ -142,7 +132,50 @@ const AddToCalendar = () => {
   );
 };
 
+const VisitorCounter = () => {
+  const [count, setCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetch('/api/visitors')
+      .then(res => res.json())
+      .then(data => setCount(data.count))
+      .catch(err => console.error('Error fetching visitor count:', err));
+  }, []);
+
+  if (count === null) return null;
+
+  return (
+    <div className="mt-8 flex items-center justify-center gap-2 text-[10px] text-stone-400 uppercase tracking-widest">
+      <div className="w-1 h-1 rounded-full bg-wedding-gold animate-pulse" />
+      <span>{count} Ziyaretçi</span>
+    </div>
+  );
+};
+
 export default function App() {
+  useEffect(() => {
+    const duration = 15 * 1000;
+    const animationEnd = Date.now() + duration;
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 1000 };
+
+    const randomInRange = (min: number, max: number) => Math.random() * (max - min) + min;
+
+    const interval: any = setInterval(function() {
+      const timeLeft = animationEnd - Date.now();
+
+      if (timeLeft <= 0) {
+        return clearInterval(interval);
+      }
+
+      const particleCount = 50 * (timeLeft / duration);
+      // since particles fall down, start a bit higher than random
+      confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } });
+      confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } });
+    }, 250);
+    
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="min-h-screen selection:bg-wedding-gold selection:text-white overflow-x-hidden">
       
@@ -153,7 +186,7 @@ export default function App() {
           <img 
             src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&q=80&w=1920" 
             alt="Wedding Background" 
-            className="w-full h-full object-cover opacity-30"
+            className="w-full h-full object-cover opacity-30 shadow-inner"
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-wedding-cream/60 via-wedding-cream/20 to-wedding-cream"></div>
@@ -184,8 +217,8 @@ export default function App() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="z-10 my-8"
         >
-          <p className="text-wedding-gold font-script text-4xl md:text-5xl mb-4 animate-float">
-            Düğünümüze Davetlisiniz
+          <p className="text-wedding-gold font-script text-4xl md:text-5xl mb-4 animate-pulse">
+            Bugün En Mutlu Günümüz!
           </p>
           <h1 className="text-5xl md:text-8xl font-serif font-light tracking-tight text-stone-900 mb-6">
             Şeymanur <span className="text-wedding-gold font-script text-4xl md:text-6xl">&</span> Akif
@@ -195,7 +228,9 @@ export default function App() {
             25 NİSAN 2026
           </p>
           
-          <CountdownTimer />
+          <p className="text-stone-600 font-serif italic text-lg md:text-xl mb-8">
+            Sizleri bekliyoruz...
+          </p>
         </motion.div>
 
         {/* Bottom Arrow */}
@@ -237,48 +272,57 @@ export default function App() {
         </motion.div>
       </section>
 
-      {/* Events Section */}
-      <section className="py-24 px-6 bg-wedding-sage/30">
+      {/* Highlighted Wedding Location Section */}
+      <section className="py-24 px-6 bg-wedding-sage/40">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-serif text-center mb-16">Etkinlik Bilgileri</h2>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <div className="inline-flex items-center justify-center p-4 bg-wedding-gold/10 rounded-full mb-6">
+              <MapPin className="w-8 h-8 text-wedding-gold" />
+            </div>
+            <h2 className="text-4xl font-serif mb-6 text-stone-900">Konum Bilgimiz</h2>
+            <p className="text-stone-500 text-lg font-light">Sizleri burada bekliyor olacağız.</p>
+          </motion.div>
           
-          <div className="grid md:grid-cols-2 gap-8">
-            {EVENTS.map((event, idx) => (
+          <div className="max-w-2xl mx-auto">
+            {EVENTS.map((event) => (
               <motion.div
                 key={event.id}
-                initial={{ opacity: 0, x: idx === 0 ? -20 : 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className={`p-8 rounded-3xl glass-card relative overflow-hidden group`}
+                className={`p-10 rounded-3xl glass-card relative overflow-hidden border border-wedding-gold/20 shadow-xl group`}
               >
-                <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:scale-110 transition-transform">
-                  {event.icon}
+                <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:scale-110 transition-transform text-wedding-gold">
+                  <Map className="w-12 h-12" />
                 </div>
                 
-                <h3 className="text-2xl font-serif font-bold mb-2 text-stone-900">{event.title}</h3>
+                <h3 className="text-2xl font-serif font-bold mb-4 text-stone-900">{event.title}</h3>
                 
-                {event.id === 'kina' && (
-                  <p className="text-rose-600 text-sm font-semibold mb-6 tracking-wide animate-pulse">
-                    (Hanımlara özeldir)
+                <div className="mb-8 p-3 bg-wedding-gold/5 rounded-xl inline-block">
+                  <p className="text-wedding-gold font-semibold tracking-wide">
+                    BUGÜN SAAT {event.time}
                   </p>
-                )}
+                </div>
                 
-                {event.id !== 'kina' && <div className="mb-6" />}
-                
-                <div className="space-y-4 mb-8">
-                  <div className="flex items-center gap-3 text-stone-600">
+                <div className="space-y-4 mb-10">
+                  <div className="flex items-center gap-3 text-stone-700">
                     <Calendar className="w-5 h-5 text-wedding-gold shrink-0" />
                     <span>{event.date}</span>
                   </div>
-                  <div className="flex items-center gap-3 text-stone-600">
+                  <div className="flex items-center gap-3 text-stone-700">
                     <Clock className="w-5 h-5 text-wedding-gold shrink-0" />
                     <span>{event.time}</span>
                   </div>
-                  <div className="flex items-start gap-3 text-stone-600">
-                    <MapPin className="w-5 h-5 text-wedding-gold shrink-0 mt-0.5" />
+                  <div className="flex items-start gap-3 text-stone-700">
+                    <MapPin className="w-5 h-5 text-wedding-gold shrink-0 mt-1" />
                     <div>
-                      <p className="font-medium text-stone-800">{event.location}</p>
-                      <p className="text-sm">{event.address}</p>
+                      <p className="font-bold text-stone-900 text-xl mb-1">{event.location}</p>
+                      <p className="text-sm text-stone-500">{event.address}</p>
                     </div>
                   </div>
                 </div>
@@ -287,10 +331,10 @@ export default function App() {
                   href={event.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 w-full justify-center px-6 py-3 border border-stone-200 rounded-xl hover:bg-stone-50 transition-colors text-sm font-medium text-stone-800"
+                  className="flex items-center gap-2 w-full justify-center px-6 py-4 bg-wedding-gold text-white rounded-xl hover:bg-wedding-gold/90 transition-all text-sm font-bold transform hover:-translate-y-1 shadow-lg shadow-wedding-gold/20"
                 >
                   <ExternalLink className="w-4 h-4" />
-                  Yol Tarifi Al
+                  Haritada Aç & Yol Tarifi
                 </a>
               </motion.div>
             ))}
@@ -322,6 +366,7 @@ export default function App() {
         <p className="text-stone-400 text-xs uppercase tracking-widest">
           25.04.2026 • İstanbul
         </p>
+        <VisitorCounter />
       </footer>
 
     </div>
